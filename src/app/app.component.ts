@@ -49,7 +49,21 @@ export class AppComponent {
 
   private appService: AppService = inject(AppService);
 
-  stats$: Observable<VM> = of(VMDefault);
+  stats$: Observable<VM> = combineLatest([
+    this.appService.sentenceStats$,
+    this.appService.letterStats$,
+    this.appService.selectedChar$
+  ]).pipe(
+    withLatestFrom(this.appService.highlightedSentence$),
+    map(([[sentenceStats, letterStats, selectedChar], highlightedSentence]: [[SentenceStats, LetterStats[], string], SafeHtml | undefined]) => {
+      return {
+        sentenceStats,
+        letterStats,
+        selectedChar,
+        highlightedSentence
+      }
+    })
+  );
 
   ngOnInit(): void {
   }

@@ -1,1 +1,20 @@
+@import './assets/scss/variables';
+
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: "Open Sans";
+  margin: 0;
+  height: 100vh;
+  background-color: $gray-100;
+}
+
+mark {
+  background-color: rgb(153, 245, 245);
+}
+
+div.text-input {
+  box-sizing: border-box;
+  max-height: 166px;
+  overflow-y: scroll;
+}
